@@ -2,8 +2,8 @@
 
 one:
   text: MyString
-  isCompleted: 
+  isCompleted: false
 
 two:
   text: MyString
-  isCompleted: 
+  isCompleted: false

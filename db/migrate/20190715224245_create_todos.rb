@@ -1,6 +1,6 @@
-class CreateTodoEntries < ActiveRecord::Migration[5.2]
+class CreateTodos < ActiveRecord::Migration[5.2]
   def change
-    create_table :todo_entries do |t|
+    create_table :todos do |t|
       t.string :text
       t.boolean :isCompleted
 
