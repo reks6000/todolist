@@ -1,1 +1,13 @@
+<h1>New todo entry</h1>
  
+ 
+<%= form_with scope: :todo, url: todos_path, local: true do |entry| %>
+  <p>
+    <%= entry.label :text %><br>
+    <%= entry.text_area :text %>
+  </p>
+ 
+  <p>
+    <%= entry.submit %>
+  </p>
+<% end %>
