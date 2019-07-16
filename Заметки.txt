@@ -1,0 +1,5 @@
+project = Project.create title: "My project"
+todo = Todo.create text: "Wife"
+project.todos << todo
+lol = Lol.create text: "Wife"
+project.lols << lol

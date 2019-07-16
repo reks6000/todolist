@@ -17,7 +17,7 @@ class TodosController < ApplicationController
         @todo.save
         redirect_to @todo
 
-        #render plain: params[:todo].inspect
+#        render plain: params[:todo].inspect
     end
  
     private

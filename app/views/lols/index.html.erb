@@ -1,0 +1,16 @@
+<h1>Lol list</h1>
+ 
+<table>
+  <tr>
+    <th>Text</th>
+    <th>IsCompleted</th>
+    <th></th>
+  </tr>
+ 
+  <% @lols.each do |lol| %>
+    <tr>
+      <td><%= lol.text %></td>
+      <td><%= lol.isCompleted %></td>
+    </tr>
+  <% end %>
+</table>
