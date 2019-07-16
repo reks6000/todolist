@@ -1,5 +1,5 @@
 class Todo < ApplicationRecord
-    belongs_to :project
+#     belongs_to :project
 #     after_initialize :set_defaults
 
 #     def set_defaults
