@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get 'project/index'
+  get 'projects/index'
  
   resources :todos
   
-  root 'project#index'
+  root 'projects#index'
 end
