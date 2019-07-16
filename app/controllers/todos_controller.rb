@@ -1,7 +1,11 @@
 class TodosController < ApplicationController
     
+    def index
+        @todos = Todo.all
+    end
+    
     def show
-        @todo = TodoEntry.find(params[:id])
+        @todo = Todo.find(params[:id])
     end
     
     def new
@@ -9,7 +13,7 @@ class TodosController < ApplicationController
     end
     
     def create
-        @todo = TodoEntry.new(todo_params)
+        @todo = Todo.new(todo_params)
         @todo.save
         redirect_to @todo
 
