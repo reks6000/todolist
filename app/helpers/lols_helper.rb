@@ -1,2 +1,0 @@
-module LolsHelper
-end
