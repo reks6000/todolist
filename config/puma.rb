@@ -20,6 +20,10 @@ on_worker_boot do
   ActiveRecord::Base.establish_connection
 end
 
+# rails db:migrate:reset
+# rails db:seed
+# rails s
+
 
 # threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 # threads threads_count, threads_count
