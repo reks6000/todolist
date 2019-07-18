@@ -15,14 +15,14 @@ class TodosController < ApplicationController
     def create
         @todo = Todo.new(todo_params)
         @todo.save
-        redirect_to @todo
+        redirect_to '/'
 
-#        render plain: params[:todo].inspect
+#         render plain: params[:todo].inspect
     end
  
     private
         def todo_params
-            params.require(:todo).permit(:text, :isCompleted)
+            params.require(:todo).permit(:text, :isCompleted, :project_id)
         end
     
 end

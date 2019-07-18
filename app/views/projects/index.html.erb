@@ -1,4 +1,32 @@
-<h1>Hello, Rails!</h1>
+<h1>Задачи</h1>
 
-<%= link_to 'New todo', new_todo_path %>
+<% @projects.each do |project| %>
+    <h3><%= project.title %></h3>
+    
+    <ul>
+    <% project.todos.each do |todo| %>
+    <li><%= todo.text %></li>
+    <% end %> 
+    </ul>
+    
+<% end %>
 
+<a id="plus" href="#">+</a>
+
+<div id="addTodo" href="#">
+
+<h2>Новая задача</h2>
+<%= form_with scope: :todo, url: todos_path, local: true do |entry| %>
+  <p> <%= entry.text_area :text,  :placeholder => 'Название задачи...'%> </p>
+<!--     <%#= entry.collection_select :project_id, Project.order(:title),:id,:title, include_blank: false %> -->
+  <p> <%= entry.select :project_id, Project.all.pluck(:title, :id), {class: "form-control"}%> </p>
+    
+  <p>
+    <a id="cancel" href="">Отмена</a>
+    <%#= entry.submit %>
+    <%#= link_to 'OK', "/", :onclick => entry.submit() %>
+    <a id="submit" href="#"> ОК </a>
+  </p>
+<% end %>
+
+</div>
