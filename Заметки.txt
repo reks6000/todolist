@@ -6,3 +6,17 @@ project.todos
 
 Полная перезапись бд
 rails db:migrate:reset 
+
+
+Heroku
+git add .
+git commit -m " "
+heroku login
+git push heroku master
+
+
+rake db:drop
+rake db:migrate
+heroku addons
+heroku pg:reset SHARED_DATABASE
+heroku run rake db:migrate 
