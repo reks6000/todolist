@@ -18,7 +18,6 @@
 <h2>Новая задача</h2>
 <%= form_with scope: :todo, url: todos_path, local: true do |entry| %>
   <p> <%= entry.text_area :text,  :placeholder => 'Название задачи...'%> </p>
-<!--     <%#= entry.collection_select :project_id, Project.order(:title),:id,:title, include_blank: false %> -->
   <p> <%= entry.select :project_id, Project.all.pluck(:title, :id), {class: "form-control"}%> </p>
     
   <p>

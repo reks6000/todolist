@@ -4,10 +4,6 @@ class ProjectsController < ApplicationController
         @projects = Project.all
     end
     
-    def show
-        @project = Project.find(params[:id])
-    end
-    
     def new
         
     end
@@ -16,8 +12,6 @@ class ProjectsController < ApplicationController
         @project = Project.new(project_params)
         @project.save
         redirect_to @project
-
-#        render plain: params[:todo].inspect
     end
  
     private

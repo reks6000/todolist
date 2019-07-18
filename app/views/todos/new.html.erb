@@ -1,16 +1,12 @@
-<h1>New todo entry</h1>
- 
- 
+<h2>Новая задача</h2>
 <%= form_with scope: :todo, url: todos_path, local: true do |entry| %>
-  <p>
-    <%= entry.text_area :text,  :placeholder => 'Название задачи...'%>
-  </p>
-    <%#= entry.collection_select :project_id, Project.order(:title),:id,:title, include_blank: false %>
-    <%= entry.select :project_id, Project.all.pluck(:title, :id), {class: "form-control"}%>
+  <p> <%= entry.text_area :text,  :placeholder => 'Название задачи...'%> </p>
+  <p> <%= entry.select :project_id, Project.all.pluck(:title, :id), {class: "form-control"}%> </p>
     
   <p>
+    <a id="cancel" href="">Отмена</a>
     <%#= entry.submit %>
     <%#= link_to 'OK', "/", :onclick => entry.submit() %>
+    <a id="submit" href="#"> ОК </a>
   </p>
 <% end %>
-<%= link_to 'Отмена', projects_index_path %>
