@@ -1,31 +1,46 @@
-<h1>Задачи</h1>
+<span class="page">
+<!-- <link rel="stylesheet" href="/home/timur/Документы/Sites/todolist/app/assets/javascripts/vendor/icheck-1.x/skins/square/blue.css.scss"> -->
+<!-- <link href="http://fronteed.com/iCheck/skins/all.css" rel="stylesheet">  -->
+<!-- <script src="http://fronteed.com/iCheck/icheck.js"></script> -->
 
-<% @projects.each do |project| %>
-    <h3><%= project.title %></h3>
-    
-    <ul>
-    <% project.todos.each do |todo| %>
-    <li><%= todo.text %></li>
-    <% end %> 
-    </ul>
-    
-<% end %>
+<!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" rel="stylesheet" /> -->
+
+<h1>Задачи</h1>
+<div class="row">
+    <% @projects.each do |project| %>
+    <div class="project col-lg-3 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-11 col-sm-offset-1 col-xs-11 col-xs-offset-1">
+        <h4><%= project.title %></h4>
+        <hr />
+        <ul style="list-style: none;">
+            <% project.todos.each do |todo| %>
+                <label class="s" data-flag=<%= todo.isCompleted %>><li><input type="checkbox"><span class="text"><%= todo.text %><span></li></label>
+    <!--             <li><%#= todo.isCompleted %></li> -->
+            <% end %> 
+        </ul>
+    </div>   
+    <% end %>
+</div>
 
 <a id="plus" href="#">+</a>
 
-<div id="addTodo" href="#">
-
-<h2>Новая задача</h2>
-<%= form_with scope: :todo, url: todos_path, local: true do |entry| %>
-  <p> <%= entry.text_area :text,  :placeholder => 'Название задачи...'%> </p>
-  <p> <%= entry.select :project_id, Project.all.pluck(:title, :id), {class: "form-control"}%> </p>
-    
-  <p>
-    <a id="cancel" href="">Отмена</a>
-    <%#= entry.submit %>
-    <%#= link_to 'OK', "/", :onclick => entry.submit() %>
-    <a id="submit" href="#"> ОК </a>
-  </p>
-<% end %>
-
+<div id="addTodo">
+    <div class="header">Новая задача</div>
+    <hr />
+    <%= form_with scope: :todo, url: todos_path, local: true do |entry| %>
+    <div class="textField"> <%= entry.text_area :text,  :placeholder => 'Название задачи...'%> </div>
+    <div class="selectField"> <%= entry.select :project_id, Project.all.pluck(:title, :id), {class: "form-control"}%> </div>
+    <!--<select id="e1">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+    </select> -->
+        
+    <p>
+        <a class="button" id="cancel" href="">Отмена</a>
+        <a class="button" id="submit" href="#"> ОК </a>
+    </p>
+    <% end %>
 </div>
+
+</span>

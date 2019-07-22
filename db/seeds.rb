@@ -6,36 +6,39 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-def iterate(h, project, todo)
-    h.each do |k,v|
-        value = v || k
-
-        if value.is_a?(Hash) || value.is_a?(Array)
-#           puts "evaluating: #{value} recursively..."
-#           puts
-            iterate(value, project, todo)
-        else
-            case k
-            when "title"
-                project = Project.create title: v
-            when "text"
-                todo = Todo.create text: v
-            when "isCompleted"
-                todo.update isCompleted: v 
-                project.todos << todo
-            end
-#             result.store(k, v)
-#             puts "key: #{k} value: #{v}" 
-#             puts
-        end
-    end
-end
+# def iterate(h, project, todo)
+#     h.each do |k,v|
+#         value = v || k
+# 
+#         if value.is_a?(Hash) || value.is_a?(Array)
+#             iterate(value, project, todo)
+#         else
+#             case k
+#             when "title"
+#                 project = Project.create title: v
+#             when "text"
+#                 todo = Todo.create text: v
+#             when "isCompleted"
+#                 todo.update isCompleted: v 
+#                 project.todos << todo
+#             end
+#         end
+#     end
+# end
 
 seed_file = Rails.root.join('db', 'seeds', 'projects.yml')
-config = YAML::load_file(seed_file)
-project = Project.create
-todo = Todo.create
-iterate(config, project, todo)
-Todo.first.delete
-Project.first.delete
+config = HashWithIndifferentAccess.new(YAML::load_file(seed_file))
+
+config[:projects].each do |project|
+    p = Project.new(title: project[:title])
+    project[:todos].each do |todo|
+        p.todos << Todo.create(todo)
+    end
+    p.save!
+end
+# project = Project.create
+# todo = Todo.create
+# iterate(config, project, todo)
+# Todo.first.delete
+# Project.first.delete
 

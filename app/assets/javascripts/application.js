@@ -15,19 +15,63 @@
 //= require bootstrap
 //= require activestorage
 //= require_tree .
+//= require select2-full
 
-$(document).ready(function() {
-  $("#addTodo").hide();
-  $("#plus").on('click', function(e){
-    e.preventDefault();
-    $("#addTodo").show();
-  });
-  $("#cancel").on('click', function(e){
-    e.preventDefault();
+$(document).ready(function(){
+    
+//     $('select').select2({dropdownCssClass : 'bigdrop'});
+//     $('select').select2({width: 'resolve'});
+    
+    $('select').select2({
+        minimumResultsForSearch: -1
+    });
+    
+//     $("select").select2({
+//         width: 'resolve'
+//     });
     $("#addTodo").hide();
-  });
-  $("#submit").on('click', function(e){
-    e.preventDefault();
-    $(this).closest('form').submit();
-  });
+    $("#plus").on('click', function(e){
+        e.preventDefault();
+        $("#addTodo").show();
+    });
+    $("#cancel").on('click', function(e){
+        e.preventDefault();
+        $("#addTodo").hide();
+    });
+    $("#submit").on('click', function(e){
+        e.preventDefault();
+        $(this).closest('form').submit();
+    });
+         
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+    });
+    
+    $('input').on('ifClicked', function(){
+        var elem = $(this).closest('.s')[0];
+        var text = elem.innerText;
+        var isCompleted = !($(this).iCheck('update')[0].checked);
+//         alert("value = " + isCompleted);
+        $.ajax({
+            url: 'todos/update',
+            type: 'put',
+            data: {"text" : text, "isCompleted" : isCompleted}
+        });
+        if (isCompleted)
+            elem.style.setProperty('text-decoration', 'line-through'); 
+        else 
+            elem.style.setProperty('text-decoration', 'none');
+    });
+    
+    var inputs = document.getElementsByTagName('input');
+    for (var i = 0; i < inputs.length; i++) {  
+        var elem = inputs[i].closest('.s');
+        var isCompleted = elem.getAttribute('data-flag');
+        if (isCompleted == "true") {
+            $(inputs[i]).iCheck('check');
+            elem.style.setProperty('text-decoration', 'line-through'); 
+        }
+    }
 });
+
+
